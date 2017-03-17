@@ -1,0 +1,9 @@
+
+.item{
+    width: 50px;
+    height: auto;
+}
+label, button{
+    font-size: 30px;
+    font-family: "微軟正黑體";
+}

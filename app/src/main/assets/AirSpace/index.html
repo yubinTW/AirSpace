@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <script src="vender/jquery-2.1.4.min.js"></script>
+        <script src="vender/wf8266r.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" href="css/index.css">
+        
+    </head>
+    <body>
+        
+        <div class="top-zone"> &nbsp;
+            <h2 class="top-info" id="location">&nbsp;</h2>
+            <time class="top-info" id="today">&nbsp;</time>
+            <span  class="top-info" id="last-update">&nbsp;</span>
+        </div>
+        
+        <div class="content">
+            <table>
+                <tr><td>
+                    <a href="airDetail.html">
+                    <span class="pm25 label">PM2.5</span>
+                    <span id="pm25-value"></span>
+                    <img class="line" src="img/line.png">
+                    </a>
+                    </td></tr>
+                <tr><td>
+                    <a href="iconMeaning.html">
+                    <img id="qualityIcon" class="icon" src="img/face_1.png">
+                    <span class="label">空氣品質：</span>
+                    <span id="air-quality"></span>
+                    <img class="line" src="img/line.png">
+                    </a>
+                    </td></tr>
+                <tr><td>
+                    <a href="setting.html">
+                    <img class="icon" src="img/setting.png">
+                    <span class="label">模式切換</span>
+                    <img class="line" src="img/line.png">
+                    </a>
+                    </td></tr>
+                <tr><td>
+                    <img class="icon" src="img/position.png">
+                    <span class="label">觀測站：</span>
+                <select id = "siteName">
+                    <option>基隆市 基隆</option>
+                    <option>新北市 汐止</option>
+                    <option>新北市 萬里</option>
+                    <option>新北市 新店</option>
+                    <option>新北市 土城</option>
+                    <option>新北市 新莊</option>
+                    <option>新北市 菜寮</option>
+                    <option>新北市 林口</option>
+                    <option>新北市 淡水</option>
+                    <option>新北市 三重</option>
+                    <option>新北市 板橋</option>
+                    <option>新北市 永和</option>
+                    <option>台北市 士林</option>
+                    <option>台北市 中山</option>
+                    <option>台北市 萬華</option>
+                    <option>台北市 古亭</option>
+                    <option>台北市 松山</option>
+                    <option>台北市 大同</option>
+                    <option>台北市 陽明</option>
+                    <option>桃園市 桃園</option>
+                    <option>桃園市 大園</option>
+                    <option>桃園市 觀音</option>
+                    <option>桃園市 平鎮</option>
+                    <option>桃園市 龍潭</option>
+                    <option>桃園市 中壢</option>
+                    <option>新竹縣 湖口</option>
+                    <option>新竹縣 竹東</option>
+                    <option>新竹市 新竹</option>
+                    <option>宜蘭縣 宜蘭</option>
+                    <option>宜蘭縣 冬山</option>
+                    <option>苗栗縣 頭份</option>
+                    <option>苗栗縣 苗栗</option>
+                    <option>苗栗縣 三義</option>
+                    <option>台中市 豐原</option>
+                    <option>台中市 沙鹿</option>
+                    <option>台中市 大里</option>
+                    <option>台中市 忠明</option>
+                    <option>台中市 西屯</option>
+                    <option>花蓮縣 花蓮</option>
+                    <option>彰化縣 彰化</option>
+                    <option>彰化縣 線西</option>
+                    <option>彰化縣 二林</option>
+                    <option>南投縣 竹山</option>
+                    <option>南投縣 埔里</option>
+                    <option>南投縣 南投</option>
+                    <option>雲林縣 麥寮</option>
+                    <option>雲林縣 台西</option>
+                    <option>雲林縣 斗六</option>
+                    <option>雲林縣 崙背</option>
+                    <option>嘉義市 嘉義</option>
+                    <option>嘉義縣 新港</option>
+                    <option>嘉義縣 朴子</option>
+                    <option>台南市 新營</option>
+                    <option>台南市 善化</option>
+                    <option>台南市 安南</option>
+                    <option>台南市 台南</option>
+                    <option>高雄市 復興</option>
+                    <option>高雄市 美濃</option>
+                    <option>高雄市 橋頭</option>
+                    <option>高雄市 仁武</option>
+                    <option>高雄市 鳳山</option>
+                    <option>高雄市 大寮</option>
+                    <option>高雄市 林園</option>
+                    <option>高雄市 楠梓</option>
+                    <option>高雄市 左營</option>
+                    <option>高雄市 前金</option>
+                    <option>高雄市 前鎮</option>
+                    <option>高雄市 小港</option>
+                    <option>屏東縣 屏東</option>
+                    <option>屏東縣 潮州</option>
+                    <option>屏東縣 恆春</option>
+                    <option>台東縣 台東</option>
+                    <option>台東縣 關山</option>
+                    <option>澎湖縣 馬公</option>
+                    <option>金門縣 金門</option>
+                    <option>連江縣 馬祖</option>
+                </select>
+                    <img class="line" src="img/line.png">
+                    </td></tr>
+            </table>
+<!--
+            <a id="pm25_link" href="airDetail.html">
+                <p>
+                    <span>PM2.5</span>
+                    <span id="pm25-value"></span>
+                </p>
+            </a>
+            <a href="iconMeaning.html">
+                <p>
+                    <span>空氣品質：</span>
+                    <span id="air-quality"></span>
+                </p>
+            </a>
+            <p>
+                <a href="setting.html">模式切換</a>
+            </p>
+            <p>
+                <span>觀測站：</span>
+                <select id = "siteName">
+                    <option>基隆市 基隆</option>
+                    <option>新北市 汐止</option>
+                    <option>新北市 萬里</option>
+                    <option>新北市 新店</option>
+                    <option>新北市 土城</option>
+                    <option>新北市 新莊</option>
+                    <option>新北市 菜寮</option>
+                    <option>新北市 林口</option>
+                    <option>新北市 淡水</option>
+                    <option>新北市 三重</option>
+                    <option>新北市 板橋</option>
+                    <option>新北市 永和</option>
+                    <option>台北市 士林</option>
+                    <option>台北市 中山</option>
+                    <option>台北市 萬華</option>
+                    <option>台北市 古亭</option>
+                    <option>台北市 松山</option>
+                    <option>台北市 大同</option>
+                    <option>台北市 陽明</option>
+                    <option>桃園市 桃園</option>
+                    <option>桃園市 大園</option>
+                    <option>桃園市 觀音</option>
+                    <option>桃園市 平鎮</option>
+                    <option>桃園市 龍潭</option>
+                    <option>桃園市 中壢</option>
+                    <option>新竹縣 湖口</option>
+                    <option>新竹縣 竹東</option>
+                    <option>新竹市 新竹</option>
+                    <option>宜蘭縣 宜蘭</option>
+                    <option>宜蘭縣 冬山</option>
+                    <option>苗栗縣 頭份</option>
+                    <option>苗栗縣 苗栗</option>
+                    <option>苗栗縣 三義</option>
+                    <option>台中市 豐原</option>
+                    <option>台中市 沙鹿</option>
+                    <option>台中市 大里</option>
+                    <option>台中市 忠明</option>
+                    <option>台中市 西屯</option>
+                    <option>花蓮縣 花蓮</option>
+                    <option>彰化縣 彰化</option>
+                    <option>彰化縣 線西</option>
+                    <option>彰化縣 二林</option>
+                    <option>南投縣 竹山</option>
+                    <option>南投縣 埔里</option>
+                    <option>南投縣 南投</option>
+                    <option>雲林縣 麥寮</option>
+                    <option>雲林縣 台西</option>
+                    <option>雲林縣 斗六</option>
+                    <option>雲林縣 崙背</option>
+                    <option>嘉義市 嘉義</option>
+                    <option>嘉義縣 新港</option>
+                    <option>嘉義縣 朴子</option>
+                    <option>台南市 新營</option>
+                    <option>台南市 善化</option>
+                    <option>台南市 安南</option>
+                    <option>台南市 台南</option>
+                    <option>高雄市 復興</option>
+                    <option>高雄市 美濃</option>
+                    <option>高雄市 橋頭</option>
+                    <option>高雄市 仁武</option>
+                    <option>高雄市 鳳山</option>
+                    <option>高雄市 大寮</option>
+                    <option>高雄市 林園</option>
+                    <option>高雄市 楠梓</option>
+                    <option>高雄市 左營</option>
+                    <option>高雄市 前金</option>
+                    <option>高雄市 前鎮</option>
+                    <option>高雄市 小港</option>
+                    <option>屏東縣 屏東</option>
+                    <option>屏東縣 潮州</option>
+                    <option>屏東縣 恆春</option>
+                    <option>台東縣 台東</option>
+                    <option>台東縣 關山</option>
+                    <option>澎湖縣 馬公</option>
+                    <option>金門縣 金門</option>
+                    <option>連江縣 馬祖</option>
+                </select>
+            </p>
+-->
+        </div>
+
+<!--        setting WF8266R -->
+        <unu-wf8266r id="device" ip="192.168.0.10" uuid="xxxx" device="xxxx"></unu-wf8266r>
+        <input hidden id="r" type="range" pin="5" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledR')">
+        <input hidden id="g" type="range" pin="4" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledG')">
+        <input hidden id="b" type="range" pin="12" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledB')">
+    </body>
+</html>

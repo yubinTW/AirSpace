@@ -1,0 +1,104 @@
+.top-info{
+    display: block;
+    text-align: center;
+    font-family: "微軟正黑體";
+}
+#pm25_link{
+    display:flex;
+}
+.top-zone{
+    display: block;
+    background-image: url("../img/top_info.png");
+    background-repeat: no-repeat;
+    background-position: 50% 20%;
+    background-size: 80%;
+   // height:45vh;
+}
+table{
+    margin-top: 10%;
+}
+table td{
+    height:100px;
+    vertical-align : middle;
+}
+.label{
+    display: inline-grid;
+    position: relative;
+    top : -20px;
+    margin-left: 10px;
+    font-size: 40px;
+    font-family: "微軟正黑體";
+    font-weight: 600;
+}
+.pm25{
+    margin-left: 150px;
+}
+#pm25-value{
+    display: inline-block;
+    position: relative;
+    margin-left: 18%;
+    top : -15px;
+    font-size: 50px;
+    font-family: "微軟正黑體";
+    font-weight: 600;
+}
+#air-quality{
+    display: inline-block;
+    position: relative;
+    margin-right: 15%;
+    top : -18px;
+    font-size: 50px;
+    font-family: "微軟正黑體";
+    font-weight: 600;
+}
+#siteName{
+    display: inline-block;
+    position: relative;
+    width:35%;
+    top : -25px;
+    font-size: 30px;
+    font-family: "微軟正黑體";
+    font-weight: 600;
+}
+.line{
+    width:90%;
+    height:30px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top : -20px;
+/*    bottom: 0px;*/
+/*    background-color: aquamarine;*/
+}
+.icon{
+    position: relative;
+    
+    display: inline-block;
+    width: 70px;
+    height:auto;
+    margin-left: 10%; 
+}
+#location{
+    padding-top: 22vh;
+    font-size: 30px;
+}
+#today{
+    font-size: 20px;
+}
+.content{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+/*    background-color: bisque;*/
+}
+body{
+    background-image: url("../img/bg-1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+table a{
+    text-decoration:inherit;
+    color:inherit;
+    font-style: normal;
+}

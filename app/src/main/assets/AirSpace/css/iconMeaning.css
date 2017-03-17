@@ -1,0 +1,30 @@
+
+body{
+/*    padding-top:100px;*/
+    background-image: url("../img/icon_meaning.jpg");
+    background-repeat: no-repeat;
+    background-size:100%;
+    background-position: top;
+}
+.link{
+    display: block;
+    position: relative;
+    margin-top:100vh;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+span{
+    font-size: 30px;
+    display: inline-block;
+    position: relative;
+    top : -25px;
+    color:red;
+    font-family: "微軟正黑體";
+}
+
+
+#earth{
+    max-width: 80px;
+    display: inline;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <script src="vender/jquery-2.1.4.min.js"></script>
+        <script src="vender/wf8266r.js"></script>
+        <script src="js/setting.js"></script>
+        <link rel="stylesheet" href="css/setting.css">
+        <link rel="stylesheet" href="vender/toggle.css">
+        
+    </head>
+    <body>
+        
+        <div class="content">
+            
+            <h3>模式切換</h3>
+            
+            
+            <label>即時資訊</label>
+            <label class="switch">
+              <input id="real" type="checkbox">
+              <div class="slider"></div>
+            </label>
+            
+            <br>
+            
+            <label>循環變色</label>
+            <label class="switch">
+              <input id="period" type="checkbox">
+              <div class="slider"></div>
+            </label>
+            
+            <br>
+            
+            <label>自訂顏色</label>
+            <table>
+                <tr>
+                    <td><img class="item" src="img/STONE1.png" id="blue"></td>
+                    <td><img class="item" src="img/STONE2.png" id="darkblue"></td>
+                    <td><img class="item" src="img/STONE3.png" id="red"></td>
+                    <td><img class="item" src="img/STONE4.png" id="yellow"></td>
+                </tr>
+                <tr>
+                    <td><img class="item" src="img/STONE5.png" id="orange"></td>
+                    <td><img class="item" src="img/STONE6.png" id="green"></td>
+                    <td><img class="item" src="img/STONE7.png" id="darkgreen"></td>
+                    <td><img class="item" src="img/STONE8.png" id="purple"></td>
+                </tr>
+            </table>
+            <br>
+            
+            <button id="setIP">設定裝置</button>
+            
+        </div>
+        <!--        setting WF8266R -->
+        <unu-wf8266r id="device" ip="192.168.0.10" uuid="xxxx" device="xxxx"></unu-wf8266r>
+        <input hidden id="r" type="range" pin="5" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledR')">
+        <input hidden id="g" type="range" pin="4" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledG')">
+        <input hidden id="b" type="range" pin="12" apitype="pwm" delay="0" min="0" max="1023" value="0" step="1" onchange="GPIO.toggle(this, this.value, 'ledB')">
+    </body>
+</html>
