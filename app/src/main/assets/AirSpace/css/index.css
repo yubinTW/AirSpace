@@ -10,44 +10,44 @@
     display: block;
     background-image: url("../img/top_info.png");
     background-repeat: no-repeat;
-    background-position: 50% 20%;
+    background-position: 50% 0%;
     background-size: 80%;
-   // height:45vh;
+    height: 260px;
 }
 table{
-    margin-top: 10%;
+    margin-top: 8%;
 }
 table td{
-    height:10%;
+    height: ㄓ%;
     vertical-align : middle;
 }
 .label{
     display: inline-grid;
     position: relative;
     top : -20px;
-    margin-left: 10px;
-    font-size: 20px;
+    margin-left: 5px;
+    font-size: 25px;
     font-family: "微軟正黑體";
     font-weight: 600;
 }
 .pm25{
-    margin-left: 150px;
+    margin-left: 110px;
 }
 #pm25-value{
     display: inline-block;
     position: relative;
-    margin-left: 18%;
+    margin-left: 12%;
     top : -15px;
-    font-size: 50px;
+    font-size: 30px;
     font-family: "微軟正黑體";
     font-weight: 600;
 }
 #air-quality{
     display: inline-block;
     position: relative;
-    margin-right: 15%;
+    margin-right: 10%;
     top : -18px;
-    font-size: 50px;
+    font-size: 30px;
     font-family: "微軟正黑體";
     font-weight: 600;
 }
@@ -55,19 +55,19 @@ table td{
     display: inline-block;
     position: relative;
     width:35%;
-    top : -25px;
-    font-size: 30px;
+    top : -20px;
+    font-size: 25px;
     font-family: "微軟正黑體";
     font-weight: 600;
 }
 .line{
-    width:90%;
-    height:30px;
+    width:80%;
+    height:20px;
     display: block;
     margin-right: auto;
     margin-left: auto;
     position: relative;
-    top : -20px;
+    top : -6px;
 /*    bottom: 0px;*/
 /*    background-color: aquamarine;*/
 }
@@ -75,16 +75,19 @@ table td{
     position: relative;
     
     display: inline-block;
-    width: 70px;
+    width: 50px;
     height:auto;
-    margin-left: 10%; 
+    margin-left: 6%;
 }
 #location{
-    padding-top: 22vh;
-    font-size: 30px;
+    padding-top: 106px;
+    font-size: 20px;
 }
 #today{
-    font-size: 20px;
+    font-size: 16px;
+}
+#last-update{
+    font-size : 12px;
 }
 .content{
     display: table;
@@ -95,10 +98,10 @@ table td{
 body{
     background-image: url("../img/bg-1.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 1280px;
 }
 table a{
-    text-decoration:inherit;
+    text-decoration : none;
     color:inherit;
     font-style: normal;
 }

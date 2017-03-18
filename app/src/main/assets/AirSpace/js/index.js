@@ -5,7 +5,7 @@ var targetData = null;    // one record we need to update
 
 var mode = android.getMode();
 console.log("hi index.js~");
-alert("mode= "+mode);
+//alert("mode= "+mode);
 $(function () {
         
     });	
@@ -45,12 +45,13 @@ function getAirInfo(method){
     $.getJSON(info_api+'&callBack=?')  // resolve the "XMLHttpRequest cannot load" problem
         .done(function(data){
 //            console.log("@"+data);
-//            air = data;
+            air = data;
             android.setAirDataString(JSON.stringify(data));
 //            android.showToast(android.getAirDataString());
             method();
             console.log("getAirData!");
-            talkDevice();
+            if(mode == "null" || mode==null || mode=="real")
+                talkDevice();
         });
 }
 
@@ -60,11 +61,16 @@ function loadAirInfo(){
 //    }
 //    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     var findResult = false;
-    var results = null;
+    var results = [];
     
     var air = JSON.parse(android.getAirDataString());
     console.log("air: "+air);
-    results = air.filter(function(item){return item["SiteName"]==area_name;});  // find is have same siteName
+//    results = air.filter(function(item){return item["SiteName"]==area_name;});  // find is have same siteName
+    for(var i=0;i<air.length;i++){
+        if(air[i]["SiteName"] == area_name)
+            results.push(air[i]);
+    }
+//    alert(air.length+" __ "+results.length);
     console.log("results: "+results);
     if(results.length > 0)
         findResult = true;
@@ -129,8 +135,8 @@ function updateAirInfo(){
 
     
 //    localStorage.setItem("airData",JSON.stringify(data));   // pass the obj to airDetail.html
-    
-    if(mode=="real" || mode==null){
+//    alert("mode: "+mode);
+    if(mode=="real" || mode==null || mode == "null"){
         talkDevice();
     }
     
@@ -183,10 +189,11 @@ function updateDate(){
 // ask wf8266r to do something
 function talkDevice(){
     
-    if( mode == "real" || mode == null){
+    if( mode == "real" || mode == null || mode == "null"){
         console.log("real mode action~");
-        var pm = data["PM2.5"];
-        console.log("pm",pm);
+
+        var pm = targetData["PM2.5"];
+        console.log("pm: "+pm);
         if(pm>=0 && pm<=35)
             changeColor(0,255,0);
         if(pm>=36 && pm<=53)

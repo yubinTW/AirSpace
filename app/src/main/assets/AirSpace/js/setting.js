@@ -3,14 +3,17 @@ $(document).ready(function(){
     //載入 WF8266R 元件
     GPIO.init();
     console.log(document.getElementById("device").getAttribute("ip"));
-    console.log(localStorage.getItem("ip"));
-    if(android.getIP() != "null"){
-        document.getElementById("device").setAttribute("ip",android.getIP());
+//    console.log(localStorage.getItem("ip"));
+    var ip = android.getIP();
+    console.log("ip: "+ip);
+    if(ip != "null" && ip != null){
+        document.getElementById("device").setAttribute("ip",ip);
+        console.log("after: "+document.getElementById("device").getAttribute("ip"));
     }
     
     // check what mode now is, and update the element status
     var mode =android.getMode();
-    console.log("mode=",mode);
+    console.log("mode="+mode);
     if(mode=="null" || mode=="real"){
         document.getElementById("real").checked = true;
     }
@@ -42,7 +45,7 @@ $(document).ready(function(){
         document.getElementById("period").checked = false;
         document.getElementById("real").checked = false;
 //        localStorage.setItem("mode","single");
-        android.setMode("single");
+
         if(this.id == "blue")
             changeColor(0,0,128);
         if(this.id == "darkblue")
@@ -59,12 +62,15 @@ $(document).ready(function(){
             changeColor(0,255,0);
         if(this.id == "purple")
             changeColor(255,0,255);
+        android.setMode("single");
     });
     
     $("#setIP").on("click",function(){
         var input = prompt("輸入WF8266R的IP：");
 //        localStorage.setItem("ip",input);
         android.setIP(input);
+        ip = input;
+        document.getElementById("device").setAttribute("ip",ip);
     });
     
     

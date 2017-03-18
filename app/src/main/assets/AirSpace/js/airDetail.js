@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    android.showToast("airDetail");
+    android.showToast("觀測站詳細數據");
     updateInfo();
     
 });

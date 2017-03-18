@@ -1,9 +1,19 @@
-
+h3{
+    text-align : center;
+}
 .item{
-    width: 50px;
+    width: 70px;
     height: auto;
+}
+table{
+    margin-left : auto;
+    margin-right: auto;
+}
+body {
+    height : 580px;
 }
 label, button{
     font-size: 30px;
     font-family: "微軟正黑體";
+    margin-top : 10px;
 }

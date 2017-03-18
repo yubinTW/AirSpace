@@ -1,4 +1,7 @@
 td{
-    font-size: 30px;
+    font-size: 22px;
     font-family: "微軟正黑體";
+}
+body {
+    height : 580px;
 }
