@@ -18,7 +18,7 @@ table{
     margin-top: 10%;
 }
 table td{
-    height:100px;
+    height:10%;
     vertical-align : middle;
 }
 .label{
@@ -26,7 +26,7 @@ table td{
     position: relative;
     top : -20px;
     margin-left: 10px;
-    font-size: 40px;
+    font-size: 20px;
     font-family: "微軟正黑體";
     font-weight: 600;
 }

@@ -1,18 +1,20 @@
 var air = null; // data from api json
 var city_name = null;
 var area_name = null;
-var data = null;    // one record we need to update
+var targetData = null;    // one record we need to update
 
-var mode = localStorage.getItem("mode");
+var mode = android.getMode();
 console.log("hi index.js~");
+alert("mode= "+mode);
 $(function () {
         
     });	
 $(document).ready(function(){
-
+//android.showToast("Hi Java~");
+    var ip = android.getIP();
     console.log(document.getElementById("device"));
-    if(localStorage.getItem("ip") != null ){
-        document.getElementById("device").setAttribute("ip",localStorage.getItem("ip"));
+    if(ip != "null" ){
+        document.getElementById("device").setAttribute("ip",ip);
     }
     console.log("device ip:",document.getElementById("device").getAttribute("ip"));
     //載入 WF8266R 元件
@@ -43,7 +45,9 @@ function getAirInfo(method){
     $.getJSON(info_api+'&callBack=?')  // resolve the "XMLHttpRequest cannot load" problem
         .done(function(data){
 //            console.log("@"+data);
-            air = data;
+//            air = data;
+            android.setAirDataString(JSON.stringify(data));
+//            android.showToast(android.getAirDataString());
             method();
             console.log("getAirData!");
             talkDevice();
@@ -58,8 +62,10 @@ function loadAirInfo(){
     var findResult = false;
     var results = null;
     
-    
+    var air = JSON.parse(android.getAirDataString());
+    console.log("air: "+air);
     results = air.filter(function(item){return item["SiteName"]==area_name;});  // find is have same siteName
+    console.log("results: "+results);
     if(results.length > 0)
         findResult = true;
     else {
@@ -70,7 +76,7 @@ function loadAirInfo(){
             || (city_name=="台東市"&&item["County"]=="臺東市") ;}); // find is have same cityName, and handle the problem of the funcking chinese word
         if(results.length ==1 ){  // if only one site in city , show that
             findResult = true;
-            data = results[0];
+            targetData = results[0];
         }
         else if(results.length >1 ){ // if many site in city, show the hightest PM2.5 data
             var max = -1;
@@ -82,19 +88,33 @@ function loadAirInfo(){
                 }
             }
             findResult = true;
-            data = results[maxIndex];
+            targetData = results[maxIndex];
+//            alert(data);
         }
     }
+//    alert("target: "+JSON.stringify(targetData));
+    android.setTargetDataString(JSON.stringify(targetData));
 //    console.log(data);
+
+    // set siteName selector
+    var selector = document.getElementById("siteName");
+    for(var i =0;i<selector.length;i++)
+        if(selector[i].text.split(" ")[1] == targetData["SiteName"]){
+            selector.selectedIndex = i;
+            console.log("selected: "+i);
+            break;
+        }
+
     updateAirInfo();
 }
 
 function updateAirInfo(){
-    document.getElementById("last-update").innerHTML = "更新時間：" + data["PublishTime"].split(" ")[1];
-    document.getElementById("pm25-value").innerHTML = data["PM2.5"];
-    document.getElementById("air-quality").innerHTML = data["Status"];
+
+    document.getElementById("last-update").innerHTML = "更新時間：" + targetData["PublishTime"].split(" ")[1];
+    document.getElementById("pm25-value").innerHTML = targetData["PM2.5"];
+    document.getElementById("air-quality").innerHTML = targetData["Status"];
     var icon = document.getElementById("qualityIcon");
-    var pm25 = data["PM2.5"];
+    var pm25 = targetData["PM2.5"];
     if(pm25>=0 && pm25<=35)
         icon.setAttribute("src","img/face_1.png");
     if(pm25>=36 && pm25<=53)
@@ -105,14 +125,10 @@ function updateAirInfo(){
         icon.setAttribute("src","img/face_4.png");
     if(pm25>70)
         icon.setAttribute("src","img/face_5.png");
-    var selector = document.getElementById("siteName");
-    var selectedIndex = -1;     // find matched sitename, update the selectedIndex of the select list
-    for(var i =0 ;i<selector.length ;i++)
-        if(selector[i].text.split(" ")[1] == data["SiteName"])
-            selectedIndex = i;
-    document.getElementById("siteName").selectedIndex = selectedIndex;
+
+
     
-    localStorage.setItem("airData",JSON.stringify(data));   // pass the obj to airDetail.html
+//    localStorage.setItem("airData",JSON.stringify(data));   // pass the obj to airDetail.html
     
     if(mode=="real" || mode==null){
         talkDevice();
@@ -123,29 +139,38 @@ function updateAirInfo(){
 function changeTargetData(){
     var selector = document.getElementById("siteName");
     var siteName = selector[selector.selectedIndex].text.split(" ")[1];
-    data = air.filter(function(item){return item["SiteName"]==siteName})[0];
-    console.log(data);
+    var air = JSON.parse(android.getAirDataString());
+    targetData = air.filter(function(item){return item["SiteName"]==siteName})[0];
+    android.setTargetDataString(JSON.stringify(targetData));
+    console.log("set: "+JSON.stringify(targetData));
+//    console.log(data);
     updateAirInfo();
 }
 
 function updateLocation(position){
-    alert("yo");
     const lat=position.coords.latitude;
     const lng=position.coords.longitude;
+//    alert("location:  "+lat+"  "+lng);
     // degeocode using Google Map API
     const gmap_api = "http://maps.google.com/maps/api/geocode/json?latlng="+lat+","+lng+"&language=zh-TW";
-    alert("載入location完畢");
+//    alert("載入location完畢");
     $.getJSON(gmap_api)
         .done(function(data){
-            console.log("get location:",data.status);
-            var result = data.results.find(function (element){
-                return element.types["0"] == "administrative_area_level_3"; 
-            });
+            console.log("get location:",data.results);
+//            alert("get location:"+data.status);
+            var result =null;
+            // not find find() method
+            for(var i=0;i<data.results.length;i++)
+                if(data.results[i].types["0"] == "administrative_area_level_3")
+                    result = data.results[i];
+
             city_name = result.address_components["1"].long_name;
             area_name = result.address_components["0"].long_name;
             var loc = window.document.getElementById("location");
             loc.innerHTML = city_name +" "+ area_name;
-        });    
+
+        });
+        changeTargetData();
 }
 
 function updateDate(){

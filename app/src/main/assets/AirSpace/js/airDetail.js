@@ -1,12 +1,14 @@
 $(document).ready(function(){
-    
+    android.showToast("airDetail");
     updateInfo();
     
 });
 
 function updateInfo(){
-    var data = JSON.parse(localStorage.getItem("airData"));
-    console.log(data);
+//    var data = JSON.parse(localStorage.getItem("airData"));
+//    console.log(data);
+    var data = JSON.parse(android.getTargetDataString());
+    console.log("detail data:"+data);
     document.getElementById("County").innerHTML = data["County"];
     document.getElementById("SiteName").innerHTML = data["SiteName"];
     document.getElementById("PSI").innerHTML = data["PSI"];

@@ -4,14 +4,14 @@ $(document).ready(function(){
     GPIO.init();
     console.log(document.getElementById("device").getAttribute("ip"));
     console.log(localStorage.getItem("ip"));
-    if(localStorage.getItem("ip") != null){
-        document.getElementById("device").setAttribute("ip",localStorage.getItem("ip"));
+    if(android.getIP() != "null"){
+        document.getElementById("device").setAttribute("ip",android.getIP());
     }
     
     // check what mode now is, and update the element status
-    var mode =localStorage.getItem("mode");
+    var mode =android.getMode();
     console.log("mode=",mode);
-    if(mode==null || mode=="real"){
+    if(mode=="null" || mode=="real"){
         document.getElementById("real").checked = true;
     }
     else if(mode=="period"){
@@ -25,13 +25,15 @@ $(document).ready(function(){
         console.log(this.value,this.checked);
         if(this.checked==true){
             document.getElementById("period").checked = false;
-            localStorage.setItem("mode","real");
+//            localStorage.setItem("mode","real");
+            android.setMode("real");
         }
     });
     $("#period").on("change",function(){
         if(this.checked==true){
             document.getElementById("real").checked = false;
-            localStorage.setItem("mode","period");
+//            localStorage.setItem("mode","period");
+        android.setMode("period");
         }
     });
     
@@ -39,7 +41,8 @@ $(document).ready(function(){
         console.log("yo",this.id);
         document.getElementById("period").checked = false;
         document.getElementById("real").checked = false;
-        localStorage.setItem("mode","single");
+//        localStorage.setItem("mode","single");
+        android.setMode("single");
         if(this.id == "blue")
             changeColor(0,0,128);
         if(this.id == "darkblue")
@@ -60,7 +63,8 @@ $(document).ready(function(){
     
     $("#setIP").on("click",function(){
         var input = prompt("輸入WF8266R的IP：");
-        localStorage.setItem("ip",input);
+//        localStorage.setItem("ip",input);
+        android.setIP(input);
     });
     
     
