@@ -1,7 +1,21 @@
 td{
-    font-size: 22px;
+    font-size: 14px;
     font-family: "微軟正黑體";
+    color : #000080; /* color 3 */
 }
 body {
     height : 580px;
+    background-image : url("../img/detail_img.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+h1 {
+    margin-left : 60px;
+    color : #6495ED; /* color 2  */
+    margin-top : 135px;
+}
+table {
+    width : 70%;
+    height : auto;
+    margin-left : 60px;
 }

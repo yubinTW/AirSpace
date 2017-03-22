@@ -1,7 +1,13 @@
+/*
+    color 1 : #E0FFFF
+    color 2 : #6495ED
+    color 3 : #000080
+*/
 .top-info{
     display: block;
     text-align: center;
     font-family: "微軟正黑體";
+    color : #000080; /* color 3 */
 }
 #pm25_link{
     display:flex;
@@ -18,7 +24,7 @@ table{
     margin-top: 8%;
 }
 table td{
-    height: ㄓ%;
+    height : 10%;
     vertical-align : middle;
 }
 .label{
@@ -29,6 +35,14 @@ table td{
     font-size: 25px;
     font-family: "微軟正黑體";
     font-weight: 600;
+    color : #E0FFFF; /* color 1 */
+}
+.label_img{
+    height : 25px;
+    width : auto;
+    display: inline-grid;
+    position: relative;
+    margin-left: 20%;
 }
 .pm25{
     margin-left: 110px;
@@ -41,6 +55,8 @@ table td{
     font-size: 30px;
     font-family: "微軟正黑體";
     font-weight: 600;
+    color : #000080; /* color 3 */
+    /*background-image: url("../img/circle.png"); */
 }
 #air-quality{
     display: inline-block;
@@ -50,6 +66,7 @@ table td{
     font-size: 30px;
     font-family: "微軟正黑體";
     font-weight: 600;
+    color : #E0FFFF; /* color 1 */
 }
 #siteName{
     display: inline-block;
@@ -73,7 +90,7 @@ table td{
 }
 .icon{
     position: relative;
-    
+
     display: inline-block;
     width: 50px;
     height:auto;
