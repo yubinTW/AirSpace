@@ -6,9 +6,7 @@ var targetData = null;    // one record we need to update
 var mode = android.getMode();
 console.log("hi index.js~");
 //alert("mode= "+mode);
-$(function () {
-        
-    });	
+
 $(document).ready(function(){
 //android.showToast("Hi Java~");
     var ip = android.getIP();
@@ -18,7 +16,7 @@ $(document).ready(function(){
     }
     console.log("device ip:",document.getElementById("device").getAttribute("ip"));
     //載入 WF8266R 元件
-        GPIO.init();
+    GPIO.init();
     getUserLocation(updateLocation);
 
     getAirInfo(loadAirInfo);

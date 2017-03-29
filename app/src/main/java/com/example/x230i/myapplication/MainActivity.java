@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         webView.setInitialScale(1);
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -102,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
 //        webView.getSettings().setDatabasePath(this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath());
         webView.getSettings().setDatabasePath("/data/data/" + getPackageName() + "/databases");
 //        webView.getSettings().setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
+
+        // disable scroll on touch
+        webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getAction() == MotionEvent.ACTION_MOVE);
+            }
+        });
 
         webView.loadUrl(url);
 
