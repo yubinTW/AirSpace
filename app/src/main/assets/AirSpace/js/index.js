@@ -5,29 +5,23 @@ var targetData = null;    // one record we need to update
 
 var mode = android.getMode();
 console.log("hi index.js~");
-//alert("mode= "+mode);
 
 $(document).ready(function(){
-//android.showToast("Hi Java~");
+    
+    updateDate();
+    
     var ip = android.getIP();
     console.log(document.getElementById("device"));
     if(ip != "null" ){
         document.getElementById("device").setAttribute("ip",ip);
     }
     console.log("device ip:",document.getElementById("device").getAttribute("ip"));
-    //載入 WF8266R 元件
+    //load WF8266R components
     GPIO.init();
+    
     getUserLocation(updateLocation);
-
-    getAirInfo(loadAirInfo);
-    updateDate();
+    
     document.getElementById("siteName").addEventListener("change",changeTargetData);
-    
-    if(mode == "period"){
-        setTimeout(function(){periodDevice();},2000);
-        
-    }
-    
 });
 
 function getUserLocation(method){
@@ -36,39 +30,33 @@ function getUserLocation(method){
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
-}
+} // end of getUserLocation(.)
 
 function getAirInfo(method){
     const info_api = "http://opendata.epa.gov.tw/ws/Data/REWXQA/?$orderby=County&$skip=0&$top=1000&format=json";
     $.getJSON(info_api+'&callBack=?')  // resolve the "XMLHttpRequest cannot load" problem
         .done(function(data){
-//            console.log("@"+data);
+        
             air = data;
             android.setAirDataString(JSON.stringify(data));
-//            android.showToast(android.getAirDataString());
             method();
             console.log("getAirData!");
-            if(mode == "null" || mode==null || mode=="real")
+            if(mode == "null" || mode == null || mode == "real")
                 talkDevice();
         });
-}
+} // end of getAirInfo(.)
 
 function loadAirInfo(){
-//    for(var i =0;i<air.length;i++){
-//        console.log(air[i]);
-//    }
-//    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     var findResult = false;
     var results = [];
     
     var air = JSON.parse(android.getAirDataString());
     console.log("air: "+air);
-//    results = air.filter(function(item){return item["SiteName"]==area_name;});  // find is have same siteName
-    for(var i=0;i<air.length;i++){
+    
+    for(var i=0;i<air.length;i++)
         if(air[i]["SiteName"] == area_name)
             results.push(air[i]);
-    }
-//    alert(air.length+" __ "+results.length);
+    
     console.log("results: "+results);
     if(results.length > 0)
         findResult = true;
@@ -96,10 +84,9 @@ function loadAirInfo(){
 //            alert(data);
         }
     }
-//    alert("target: "+JSON.stringify(targetData));
+    
     android.setTargetDataString(JSON.stringify(targetData));
-//    console.log(data);
-
+    
     // set siteName selector
     var selector = document.getElementById("siteName");
     for(var i =0;i<selector.length;i++)
@@ -108,9 +95,12 @@ function loadAirInfo(){
             console.log("selected: "+i);
             break;
         }
-
+    
+    if(mode == "period"){
+        setTimeout(function(){periodDevice();},2000);
+    }
     updateAirInfo();
-}
+} // end of loadAirInfo()
 
 function updateAirInfo(){
 
@@ -130,15 +120,11 @@ function updateAirInfo(){
     if(pm25>70)
         icon.setAttribute("src","img/face_5.png");
 
-
-    
-//    localStorage.setItem("airData",JSON.stringify(data));   // pass the obj to airDetail.html
-//    alert("mode: "+mode);
     if(mode=="real" || mode==null || mode == "null"){
         talkDevice();
     }
     
-}
+} // end of updateAirTnfo()
 
 function changeTargetData(){
     var selector = document.getElementById("siteName");
@@ -147,21 +133,21 @@ function changeTargetData(){
     targetData = air.filter(function(item){return item["SiteName"]==siteName})[0];
     android.setTargetDataString(JSON.stringify(targetData));
     console.log("set: "+JSON.stringify(targetData));
-//    console.log(data);
+
     updateAirInfo();
-}
+} // end of changeTargetData()
 
 function updateLocation(position){
     const lat=position.coords.latitude;
     const lng=position.coords.longitude;
-//    alert("location:  "+lat+"  "+lng);
+    
     // degeocode using Google Map API
     const gmap_api = "http://maps.google.com/maps/api/geocode/json?latlng="+lat+","+lng+"&language=zh-TW";
-//    alert("載入location完畢");
+
     $.getJSON(gmap_api)
         .done(function(data){
             console.log("get location:",data.results);
-//            alert("get location:"+data.status);
+
             var result =null;
             // not find find() method
             for(var i=0;i<data.results.length;i++)
@@ -172,17 +158,18 @@ function updateLocation(position){
             area_name = result.address_components["0"].long_name;
             var loc = window.document.getElementById("location");
             loc.innerHTML = city_name +" "+ area_name;
-
+        
+            getAirInfo(loadAirInfo);
         });
         changeTargetData();
-}
+} // end of updateLocation()
 
 function updateDate(){
     var date = new Date();
     var today = document.getElementById("today");
     var days=["日","一","二","三","四","五","六"];
     today.innerHTML=date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+" ("+days[date.getDay()]+")";
-}
+}  // end of updateData()
 
 // ask wf8266r to do something
 function talkDevice(){
@@ -204,7 +191,7 @@ function talkDevice(){
             changeColor(255,0,0);
     }
     
-}
+} // end of talkDevice()
 
 function periodDevice(){
     console.log("period mode action");
@@ -226,10 +213,10 @@ function periodDevice(){
         setTimeout(function(){changeColor(255,165,0);},ms*5);
         setTimeout(function(){changeColor(255,0,0);},ms*6);
     },ms*7);
-}
+} // end of periodDevice()
 
 function changeColor(r,g,b){
-    console.log("changeColor",r,g,b);
+    //console.log("changeColor",r,g,b);
     // call API direct
     r = r/255.0*1023;
     g = g/255.0*1023;
@@ -240,10 +227,4 @@ function changeColor(r,g,b){
     GPIO.toggle(ledr, r, 'ledR');
     GPIO.toggle(ledg, g, 'ledG');
     GPIO.toggle(ledb, b, 'ledB');
-}
-
-function sleep(miliseconds) {
-    var currentTime = new Date().getTime();
-    while (currentTime + miliseconds >= new Date().getTime()) {
-    }
-}
+} // end of changeColor()

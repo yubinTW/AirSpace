@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     WebView webView = null;
     String mode = null;
-    String ip = "192.168.0.10";
+    String ip = "172.20.10.2";
     String airDataString = null; // JSON format
     String targetDataString = null; // JSON format
 

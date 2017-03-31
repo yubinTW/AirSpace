@@ -1,9 +1,9 @@
 $(document).ready(function(){
     
-    //載入 WF8266R 元件
+    // load WF8266R components
     GPIO.init();
     console.log(document.getElementById("device").getAttribute("ip"));
-//    console.log(localStorage.getItem("ip"));
+
     var ip = android.getIP();
     console.log("ip: "+ip);
     if(ip != "null" && ip != null){
@@ -28,14 +28,12 @@ $(document).ready(function(){
         console.log(this.value,this.checked);
         if(this.checked==true){
             document.getElementById("period").checked = false;
-//            localStorage.setItem("mode","real");
             android.setMode("real");
         }
     });
     $("#period").on("change",function(){
         if(this.checked==true){
             document.getElementById("real").checked = false;
-//            localStorage.setItem("mode","period");
         android.setMode("period");
         }
     });
@@ -44,7 +42,6 @@ $(document).ready(function(){
         console.log("yo",this.id);
         document.getElementById("period").checked = false;
         document.getElementById("real").checked = false;
-//        localStorage.setItem("mode","single");
 
         if(this.id == "blue")
             changeColor(0,0,128);
@@ -67,14 +64,13 @@ $(document).ready(function(){
     
     $("#setIP").on("click",function(){
         var input = prompt("輸入WF8266R的IP：");
-//        localStorage.setItem("ip",input);
         android.setIP(input);
         ip = input;
         document.getElementById("device").setAttribute("ip",ip);
     });
     
     
-});
+}); // end of .ready()
 
 function changeColor(r,g,b){
     console.log("changeColor",r,g,b);
@@ -88,4 +84,4 @@ function changeColor(r,g,b){
     GPIO.toggle(ledr, r, 'ledR');
     GPIO.toggle(ledg, g, 'ledG');
     GPIO.toggle(ledb, b, 'ledB');
-}
+} // end of changeColor(.)

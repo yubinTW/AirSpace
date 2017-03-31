@@ -5,8 +5,6 @@ $(document).ready(function(){
 });
 
 function updateInfo(){
-//    var data = JSON.parse(localStorage.getItem("airData"));
-//    console.log(data);
     var data = JSON.parse(android.getTargetDataString());
     console.log("detail data:"+data);
     document.getElementById("County").innerHTML = data["County"];
@@ -23,4 +21,4 @@ function updateInfo(){
     document.getElementById("WindSpeed").innerHTML = data["WindSpeed"];
     document.getElementById("WindDirec").innerHTML = data["WindDirec"];
     document.getElementById("PublishTime").innerHTML = data["PublishTime"];
-}
+} // end of updateInfo()
